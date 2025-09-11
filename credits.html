@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Students Hub — Credits</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#556b2f">
+
+</head>
+<body>
+  <div class="header-wrap container">
+    <div class="brand">
+      <div class="brand-logo">🎓</div>
+      <div>
+        <div class="brand-title">Students Hub</div>
+        <div class="muted">Credits</div>
+      </div>
+    </div>
+
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="students.html">Students</a>
+      <a href="credits.html" class="active">Credits</a>
+    </nav>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Completed Jobs & Credits</h1>
+      <p>Credits reflect completed tasks recorded for students.</p>
+    </section>
+
+    <div id="creditsList"></div>
+  </main>
+
+  <footer>© 2025 Students Hub — Credits</footer>
+
+  <script src="data.js"></script>
+  <script>
+    function renderCredits(){
+      const list = document.getElementById('creditsList');
+      list.innerHTML = '';
+      Object.values(students).forEach(s => {
+        if(!s.credits || s.credits.length === 0) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'card';
+        wrapper.innerHTML = `<h3>${s.name} — ${s.institution}</h3>`;
+        s.credits.forEach(c => {
+          const item = document.createElement('div');
+          item.className = 'credit-item';
+          item.innerHTML = `<div>${c.text}</div><div class="muted">${c.date}</div>`;
+          wrapper.appendChild(item);
+        });
+        const view = document.createElement('div');
+        view.style.marginTop = '8px';
+        view.innerHTML = `<a href="student-profile.html?id=${s.id}" style="text-decoration:none;color:var(--moss);font-weight:700">View profile</a>`;
+        wrapper.appendChild(view);
+        list.appendChild(wrapper);
+      });
+    }
+    window.addEventListener('load', renderCredits);
+  </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("✅ Service Worker registered"))
+      .catch(err => console.log("❌ Service Worker failed:", err));
+  }
+</script>
+
+</body>
+</html>

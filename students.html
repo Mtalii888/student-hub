@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Students Hub — Students</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#556b2f">
+
+</head>
+<body>
+  <div class="header-wrap container">
+    <div class="brand">
+      <div class="brand-logo">🎓</div>
+      <div>
+        <div class="brand-title">Students Hub</div>
+        <div class="muted">Students</div>
+      </div>
+    </div>
+
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="students.html" class="active">Students</a>
+      <a href="credits.html">Credits</a>
+    </nav>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Student Profiles</h1>
+      <p>Click any profile to view full details and credits.</p>
+    </section>
+
+    <div id="studentsList" class="grid"></div>
+  </main>
+
+  <footer>© 2025 Students Hub — Students</footer>
+
+  <script src="data.js"></script>
+  <script>
+    function renderStudents(){
+      const list = document.getElementById('studentsList');
+      list.innerHTML = '';
+      Object.values(students).forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'card profile-card';
+        card.innerHTML = `
+          <div class="avatar">${s.initials}</div>
+          <div class="p-info">
+            <div class="p-name">${s.name}</div>
+            <div class="p-skill">${s.skills.join(', ')}</div>
+            <div class="muted">${s.institution} • ${s.year}</div>
+          </div>
+          <div class="muted"><span class="status-dot" id="status-${s.id}"></span></div>
+        `;
+        card.addEventListener('click', () => {
+          window.location.href = `student-profile.html?id=${s.id}`;
+        });
+        list.appendChild(card);
+      });
+      randomizeStatus();
+      setInterval(randomizeStatus, 5000);
+    }
+
+    function randomizeStatus(){
+      Object.values(students).forEach(s => {
+        const el = document.getElementById('status-'+s.id);
+        if(!el) return;
+        if(Math.random() > 0.5) {
+          el.className = 'status-dot online';
+        } else {
+          el.className = 'status-dot offline';
+        }
+      });
+    }
+
+    window.addEventListener('load', renderStudents);
+  </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("✅ Service Worker registered"))
+      .catch(err => console.log("❌ Service Worker failed:", err));
+  }
+</script>
+
+</body>
+</html>

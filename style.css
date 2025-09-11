@@ -1,0 +1,102 @@
+:root{
+  --moss: #4d6a4f;
+  --lavender: #b497bd;
+  --bg: #f8fafb;
+  --surface: #ffffff;
+  --muted: #6b7280;
+  --shadow: 0 6px 20px rgba(16,24,32,0.06);
+  --radius: 12px;
+  --glass: rgba(255,255,255,0.6);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--moss);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding:18px;
+}
+
+/* Layout */
+.header-wrap{max-width:1200px;margin:0 auto 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+header.brand{
+  display:flex;align-items:center;gap:12px;
+  background:var(--surface);padding:12px;border-radius:12px;box-shadow:var(--shadow);
+  min-width:0;
+}
+.brand-logo{background:var(--lavender);color:#fff;padding:8px 12px;border-radius:8px;font-weight:700}
+.brand-title{font-weight:800}
+
+nav.site-nav{display:flex;gap:14px;align-items:center}
+nav.site-nav a{color:var(--moss);text-decoration:none;font-weight:600;padding:8px;border-radius:8px}
+nav.site-nav a.active, nav.site-nav a:hover{color:#fff;background:linear-gradient(90deg,var(--moss),#3b6a52)}
+
+/* Responsive header container for pages */
+.container{max-width:1100px;margin:0 auto;padding:18px}
+
+/* Hero */
+.hero{
+  background: linear-gradient(135deg,var(--moss),var(--lavender));
+  color:white;padding:40px;border-radius:14px;margin-bottom:20px;box-shadow:var(--shadow);
+  text-align:center;
+}
+.hero h1{font-size:1.9rem;margin-bottom:6px}
+.hero p{opacity:0.95}
+
+/* Cards */
+.card{background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow);margin-bottom:16px}
+.row{display:flex;gap:16px;align-items:center}
+.col{flex:1}
+
+/* Search & filters */
+.search-row{display:flex;gap:10px;flex-wrap:wrap}
+.search-row input, .search-row select, .search-row button{
+  padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)
+}
+.search-row button{
+  background:var(--moss);color:white;border:none;font-weight:700;cursor:pointer
+}
+
+/* Job card */
+.job-card{border-left:4px solid var(--moss);padding:12px;margin-bottom:12px}
+.job-title{font-weight:800}
+.job-meta{color:var(--muted);font-size:0.95rem}
+.job-desc{margin-top:8px;color:#334155}
+
+/* Student profile card */
+.profile-card{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.03);cursor:pointer}
+.avatar{width:64px;height:64px;border-radius:12px;background:var(--lavender);color:white;display:flex;align-items:center;justify-content:center;font-weight:800}
+.p-info{flex:1}
+.p-name{font-weight:800}
+.p-skill{color:var(--muted)}
+
+/* status dot */
+.status-dot{width:12px;height:12px;border-radius:999px;display:inline-block;margin-left:8px}
+.online{background:#2f855a}
+.offline{background:#cbd5e1}
+
+/* credits list */
+.credit-item{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:#fff;margin-bottom:8px;border:1px solid rgba(0,0,0,0.03)}
+
+/* Form styling (gov) */
+label{display:block;margin-bottom:6px;font-weight:700}
+input[type=text], select, textarea {width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);margin-bottom:10px}
+button.primary{background:var(--moss);color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+
+/* Footer */
+footer{max-width:1100px;margin:20px auto 0;padding:12px;border-radius:10px;text-align:center;color:var(--muted)}
+
+/* utility */
+.muted{color:var(--muted);font-size:0.95rem}
+.grid{display:grid;gap:16px}
+
+/* Responsive */
+@media (max-width:900px){
+  .row{flex-direction:column}
+  .header-wrap{flex-direction:column;align-items:stretch}
+  nav.site-nav{flex-wrap:wrap}
+  .avatar{width:56px;height:56px}
+}

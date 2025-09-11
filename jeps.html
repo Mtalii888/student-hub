@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jeps Catering — Bringing Flavor to Every Occasion</title>
+  <meta name="description" content="Jeps Catering — delicious food and memorable events. Book us today!" />
+
+  <style>
+    :root{
+      --gold: #c49a3f;
+      --cream: #fff7ec;
+      --deep-green: #1f5a40;
+      --muted: #6b6b6b;
+      --glass: rgba(255,255,255,0.6);
+      --radius: 14px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--cream),#fbf4ea);
+      color:var(--deep-green); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* Container */
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* NAV */
+    header{position:sticky;top:12px;z-index:40}
+    nav{
+      display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-radius:22px;background:linear-gradient(90deg,rgba(31,90,64,0.07),rgba(196,154,63,0.04));backdrop-filter:blur(6px);
+      box-shadow:0 6px 18px rgba(31,90,64,0.06);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--deep-green));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .brand h1{font-size:1.05rem;margin:0}
+    .navlinks{display:flex;gap:12px;align-items:center}
+    .navlinks a{color:var(--deep-green);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    .navlinks a:hover{background:var(--glass)}
+    .cta{background:var(--gold);color:white;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:700}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr;gap:18px;align-items:center;padding:48px 18px;border-radius:20px;margin-top:22px;background-image:linear-gradient(180deg,rgba(255,255,255,0.4),rgba(255,255,255,0.3)), url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop&crop=entropy&s=5c31d1f5065f3a1a5b6d4f3f0b1b8f9c');background-size:cover;background-position:center;box-shadow:0 12px 30px rgba(31,90,64,0.06)}
+    .hero-inner{background:linear-gradient(90deg,rgba(255,255,255,0.85),rgba(255,255,255,0.7));padding:28px;border-radius:16px;max-width:780px}
+    .hero h2{margin:0 0 12px 0;font-size:2rem;color:var(--deep-green)}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .hero .buttons{display:flex;gap:12px}
+
+    /* SECTIONS */
+    section{margin:36px 0;padding:18px}
+    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+    .section-title h3{margin:0}
+
+    /* ABOUT */
+    .about{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    .about .card{background:white;padding:18px;border-radius:14px;box-shadow:0 8px 20px rgba(31,90,64,0.04)}
+
+    /* MENU */
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .menu-card{background:white;padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 18px rgba(31,90,64,0.03)}
+    .menu-card img{width:100%;height:140px;object-fit:cover;border-radius:10px}
+    .menu-card h4{margin:0}
+    .menu-card .price{font-weight:700;color:var(--gold)}
+
+    /* TESTIMONIALS */
+    .testimonials{display:flex;gap:14px;overflow:hidden}
+    .testimonial{min-width:260px;background:white;padding:18px;border-radius:12px;box-shadow:0 8px 18px rgba(31,90,64,0.03)}
+    .stars{color:var(--gold);font-weight:700}
+
+    /* GALLERY */
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .gallery-grid img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+
+    /* CONTACT */
+    form{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:white;padding:16px;border-radius:12px;box-shadow:0 8px 18px rgba(31,90,64,0.03)}
+    form .full{grid-column:1/-1}
+    label{display:block;font-size:0.85rem;margin-bottom:6px}
+    input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #e7e3db}
+    textarea{min-height:120px;resize:vertical}
+
+    footer{margin:30px 0;padding:18px;text-align:center;color:var(--muted)}
+
+    /* FOOTER CONTACT */
+    .contact-line{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center}
+
+    /* Responsive */
+    @media(max-width:880px){
+      .about{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      header nav{padding:10px}
+      .hero h2{font-size:1.6rem}
+      form{grid-template-columns:1fr}
+    }
+    @media(max-width:480px){
+      .navlinks{display:none}
+      .hero{padding:26px}
+      .logo{width:40px;height:40px}
+    }
+
+    /* micro animations */
+    .fade-up{transform:translateY(10px);opacity:0;transition:all .6s ease-out}
+    .in-view{transform:none;opacity:1}
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <nav role="navigation" aria-label="Main navigation">
+        <div class="brand">
+          <div class="logo">J</div>
+          <div>
+            <h1>Jeps Catering</h1>
+            <div style="font-size:.8rem;color:var(--muted)">Since the 1990s • Events & Catering</div>
+          </div>
+        </div>
+
+        <div class="navlinks" id="navlinks">
+          <a href="#about">About</a>
+          <a href="#menu">Menu</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact" class="cta">Book Us Today</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-inner fade-up" data-delay="0">
+          <h2>Bringing Flavor to Every Occasion</h2>
+          <p>From intimate gatherings to large celebrations — Jeps Catering delivers delicious, beautifully presented food and warm service that makes your event unforgettable.</p>
+          <div class="buttons">
+            <a class="cta" href="#contact">Book Us Today</a>
+            <a href="#menu" style="padding:10px 14px;border-radius:12px;text-decoration:none;border:1px solid rgba(31,90,64,0.08);font-weight:700;">See Menu</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-title"><h3>About Us</h3></div>
+        <div class="about">
+          <div class="card fade-up" data-delay="120">
+            <h4>Our Story</h4>
+            <p>Jeps Catering started in the 1990s when our founder began cooking in a small hotel kitchen. Built on passion, trust and the encouragement of loyal customers, we've grown steadily. Today we're proud to have a young, energetic team committed to high-quality food and warm service.</p>
+            <p><strong>We believe:</strong> Good food brings people together. Every event deserves care, flavor, and attention to detail.</p>
+          </div>
+
+          <aside class="card fade-up" data-delay="220">
+            <h4>Why Choose Us</h4>
+            <ul>
+              <li>Custom menus for every budget</li>
+              <li>Experienced event staff</li>
+              <li>On-time delivery & setup</li>
+              <li>Trusted since the 1990s</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- MENU -->
+      <section id="menu">
+        <div class="section-title"><h3>Our Menu</h3></div>
+        <div class="menu-grid">
+
+          <article class="menu-card fade-up" data-delay="80">
+            <img src="https://images.unsplash.com/photo-1604908177222-5a57f6b32b2b?q=80&w=1000&auto=format&fit=crop&crop=entropy&s=0b7a4b2f6d7e6e3f8b3f" alt="Grilled chicken">
+            <div>
+              <h4>Grilled Herb Chicken</h4>
+              <p>Juicy, marinated chicken grilled and finished with herb butter.</p>
+            </div>
+            <div class="price">KSh 650 / plate</div>
+          </article>
+
+          <article class="menu-card fade-up" data-delay="120">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1000&auto=format&fit=crop&crop=entropy&s=1e4f2a4b1d3a9c4f0b2a" alt="Vegetarian platter">
+            <div>
+              <h4>Vegetarian Platter</h4>
+              <p>A colorful selection of roasted vegetables, grains, and house dressings.</p>
+            </div>
+            <div class="price">KSh 550 / plate</div>
+          </article>
+
+          <article class="menu-card fade-up" data-delay="160">
+            <img src="https://images.unsplash.com/photo-1543353071-087092ec393a?q=80&w=1000&auto=format&fit=crop&crop=entropy&s=2f6c3e7a8d9b4f4e6c0b" alt="Beef stew">
+            <div>
+              <h4>Slow-cooked Beef Stew</h4>
+              <p>Tender beef simmered in rich, spiced tomato sauce.</p>
+            </div>
+            <div class="price">KSh 750 / plate</div>
+          </article>
+
+          <article class="menu-card fade-up" data-delay="200">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1000&auto=format&fit=crop&crop=entropy&s=bd6b3b3f7c12" alt="Dessert">
+            <div>
+              <h4>Assorted Desserts</h4>
+              <p>A sweet finish: tarts, mini cakes, and seasonal fruit.</p>
+            </div>
+            <div class="price">KSh 300 / plate</div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section id="testimonials">
+        <div class="section-title"><h3>What Clients Say</h3></div>
+        <div class="testimonials" id="testi">
+          <blockquote class="testimonial fade-up" data-delay="80">
+            <div class="stars">★★★★★</div>
+            <p>"Jeps catered our wedding and the food was amazing. Guests are still talking about it!"</p>
+            <footer style="font-weight:700;color:var(--muted)">— Grace N.</footer>
+          </blockquote>
+          <blockquote class="testimonial fade-up" data-delay="140">
+            <div class="stars">★★★★★</div>
+            <p>"Professional, friendly, and on time. Highly recommend for corporate events."</p>
+            <footer style="font-weight:700;color:var(--muted)">— Mark O.</footer>
+          </blockquote>
+          <blockquote class="testimonial fade-up" data-delay="200">
+            <div class="stars">★★★★★</div>
+            <p>"Great flavors and beautiful presentation. Our guests loved it."</p>
+            <footer style="font-weight:700;color:var(--muted)">— Aisha K.</footer>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section id="gallery">
+        <div class="section-title"><h3>Gallery</h3></div>
+        <div class="gallery-grid fade-up" data-delay="80">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop&crop=entropy&s=1d2f3a4b5c6d" alt="Event 1">
+          <img src="https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?q=80&w=800&auto=format&fit=crop&crop=entropy&s=2a3b4c5d6e7f" alt="Event 2">
+          <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop&crop=entropy&s=3b4c5d6e7f8a">
+          <img src="https://images.unsplash.com/photo-1506084868230-bb9d95c24759?q=80&w=800&auto=format&fit=crop&crop=entropy&s=4c5d6e7f8a9b">
+          <img src="https://images.unsplash.com/photo-1543352634-9f3f3b9b8d2d?q=80&w=800&auto=format&fit=crop&crop=entropy&s=5d6e7f8a9b0c">
+          <img src="https://images.unsplash.com/photo-1495195134817-aeb325a55b65?q=80&w=800&auto=format&fit=crop&crop=entropy&s=6e7f8a9b0c1d">
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-title"><h3>Book an Event</h3></div>
+        <form id="bookingForm" class="fade-up" data-delay="120" onsubmit="return handleSubmit(event)">
+          <div>
+            <label for="name">Full name</label>
+            <input id="name" name="name" required placeholder="Jane Doe">
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@example.com">
+          </div>
+
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" required placeholder="+254 7xx xxx xxx">
+          </div>
+
+          <div>
+            <label for="event">Event type</label>
+            <select id="event" name="event" required>
+              <option value="wedding">Wedding</option>
+              <option value="corporate">Corporate</option>
+              <option value="party">Party</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="date">Date of event</label>
+            <input id="date" name="date" type="date" required>
+          </div>
+
+          <div class="full">
+            <label for="message">Message / special requests</label>
+            <textarea id="message" name="message" placeholder="Tell us about the menu you want, headcount, location, or any special requests"></textarea>
+          </div>
+
+          <div class="full" style="display:flex;justify-content:space-between;align-items:center">
+            <small style="color:var(--muted)">We will follow up by email or phone to confirm details.</small>
+            <button type="submit" class="cta">Send Booking Request</button>
+          </div>
+        </form>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="contact-line">
+        <div><strong>Email:</strong> <a href="mailto:jepscatering98@gmail.com">jepscatering98@gmail.com</a></div>
+        <div><strong>Phone:</strong> +254 7xx xxx xxx</div>
+        <div><strong>Address:</strong> Nairobi, Kenya</div>
+      </div>
+      <div style="margin-top:12px;color:var(--muted)">Follow us on social media: Facebook • Instagram • WhatsApp</div>
+      <div style="margin-top:8px;color:var(--muted);font-size:.9rem">© Jeps Catering — Since the 1990s</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+
+    // Simple fade-up on scroll
+    const faders = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){ ent.target.classList.add('in-view'); io.unobserve(ent.target); }
+      })
+    },{threshold:0.12});
+    faders.forEach((el,i)=>{el.style.transitionDelay = (el.dataset.delay||0) + 'ms'; io.observe(el)});
+
+    // Basic testimonials auto-scroll
+    const testi = document.getElementById('testi');
+    if(testi){
+      let offset = 0;
+      setInterval(()=>{
+        offset += 280; // width scroll
+        if(offset > testi.scrollWidth - testi.clientWidth) offset = 0;
+        testi.scrollTo({left:offset,behavior:'smooth'});
+      },4000);
+    }
+
+    // Booking form: just a friendly client-side confirmation (replace with real endpoint/server)
+    function handleSubmit(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      const obj = Object.fromEntries(data.entries());
+      alert('Thanks, ' + (obj.name||'') + '! Your request has been noted. We will contact you at ' + (obj.email||'') + '.');
+      form.reset();
+      return false;
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Listings - Students Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#556b2f">
+
+  <style>
+    .search-bar {
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .job-list .card {
+      margin: 15px auto;
+      max-width: 700px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">🎓</div>
+      <span>Students Hub</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="jobs.html" class="active">Jobs</a>
+      <a href="students.html">Students</a>
+      <a href="credits.html">Credits</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Job Listings</h2>
+    <div class="search-bar">
+      <input type="text" id="jobSearch" placeholder="Search jobs by title or institution..." onkeyup="filterJobs()">
+    </div>
+
+    <div id="jobList" class="job-list"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 Students Hub — Job Portal</p>
+  </footer>
+
+  <script>
+    function loadJobs() {
+      const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+      const jobList = document.getElementById("jobList");
+      jobList.innerHTML = "";
+
+      if (jobs.length === 0) {
+        jobList.innerHTML = "<p>No jobs available at the moment.</p>";
+        return;
+      }
+
+      jobs.forEach(j => {
+        jobList.innerHTML += `
+          <div class="card">
+            <h3>${j.title}</h3>
+            <p><strong>${j.institution}</strong></p>
+            <p>${j.desc}</p>
+            <small>Posted on: ${j.postedAt}</small>
+          </div>`;
+      });
+    }
+
+    function filterJobs() {
+      const query = document.getElementById("jobSearch").value.toLowerCase();
+      const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+      const jobList = document.getElementById("jobList");
+      jobList.innerHTML = "";
+
+      jobs
+        .filter(j => j.title.toLowerCase().includes(query) || j.institution.toLowerCase().includes(query))
+        .forEach(j => {
+          jobList.innerHTML += `
+            <div class="card">
+              <h3>${j.title}</h3>
+              <p><strong>${j.institution}</strong></p>
+              <p>${j.desc}</p>
+              <small>Posted on: ${j.postedAt}</small>
+            </div>`;
+        });
+
+      if (jobList.innerHTML === "") {
+        jobList.innerHTML = "<p>No jobs found for your search.</p>";
+      }
+    }
+
+    // Load jobs on page load
+    window.onload = loadJobs;
+  </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("✅ Service Worker registered"))
+      .catch(err => console.log("❌ Service Worker failed:", err));
+  }
+</script>
+
+</body>
+</html>

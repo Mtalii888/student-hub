@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Student Profile — Students Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  @media print {
+  header, footer, .btn { display: none; }
+  body { font-family: serif; }
+  .card { box-shadow: none; border: none; }
+}
+</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#556b2f">
+
+</head>
+<body>
+  <div class="header-wrap container">
+    <div class="brand">
+      <div class="brand-logo">🎓</div>
+      <div>
+        <div class="brand-title">Students Hub</div>
+        <div class="muted">Profile</div>
+      </div>
+    </div>
+
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="students.html">Students</a>
+      <a href="credits.html">Credits</a>
+    </nav>
+  </div>
+
+  <main class="container">
+    <div id="profileContainer"></div>
+  </main>
+
+  <footer>© 2025 Students Hub — Profile</footer>
+
+  <script src="data.js"></script>
+  <script>
+    function getIdFromUrl(){
+      const p = new URLSearchParams(window.location.search);
+      return p.get('id');
+    }
+
+    function renderProfile(){
+      const id = getIdFromUrl();
+      const profileContainer = document.getElementById('profileContainer');
+      if(!id || !students[id]){
+        profileContainer.innerHTML = '<div class="card"><p class="muted">Student not found.</p></div>';
+        return;
+      }
+      const s = students[id];
+      let html = `
+        <div class="card">
+          <div style="display:flex;gap:16px;align-items:center;">
+            <div style="width:96px;height:96px;border-radius:12px;background:var(--lavender);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.8rem">${s.initials}</div>
+            <div>
+              <h2 style="margin:0">${s.name}</h2>
+              <div class="muted">${s.institution} • ${s.year}</div>
+              <div style="margin-top:8px">📞 ${s.phone}</div>
+              <div style="margin-top:8px"><strong>Skills:</strong> ${s.skills.join(', ')}</div>
+            </div>
+          </div>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)" />
+
+          <h3>Credits</h3>
+      `;
+
+      if(s.credits && s.credits.length){
+        s.credits.forEach(c => {
+          html += `<div class="credit-item"><div>${c.text}</div><div class="muted">${c.date}</div></div>`;
+        });
+      } else {
+        html += `<p class="muted">No credits recorded.</p>`;
+      }
+
+      html += `</div>`;
+      profileContainer.innerHTML = html;
+    }
+
+    window.addEventListener('load', renderProfile);
+  </script><button class="btn" onclick="window.print()">Print Resume</button>\
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("✅ Service Worker registered"))
+      .catch(err => console.log("❌ Service Worker failed:", err));
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gov/Companies Portal</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#556b2f">
+
+  <style>
+    .login-box {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .portal {
+      display: none;
+      padding: 20px;
+    }
+    .btn {
+      background: var(--moss);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.2s;
+    }
+    .btn:hover { background: #4f6e46; }
+    .search-box { margin: 20px 0; }
+    .search-box input, .job-form input, .job-form textarea {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .job-form {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+    .job-list .card { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">🏛️</div>
+      <span>Gov/Companies Portal</span>
+    </div>
+  </header>
+
+  <!-- Login -->
+  <div id="loginSection" class="login-box">
+    <h2>Admin Login</h2>
+    <input type="password" id="password" placeholder="Enter Password">
+    <br>
+    <button class="btn" onclick="checkLogin()">Login</button>
+    <p id="errorMsg" style="color:red; display:none;">Incorrect password!</p>
+  </div>
+
+  <!-- Portal -->
+  <div id="portalSection" class="portal">
+    <h2>Welcome to the Gov/Companies Portal</h2>
+    <p>Here you can post jobs, search student profiles, and manage your listings.</p>
+
+    <!-- 🔍 Search Students -->
+    <div class="search-box">
+      <input type="text" id="studentSearch" placeholder="Search by name, skill, or institution..." onkeyup="filterStudents()">
+    </div>
+    <div id="results"></div>
+
+    <!-- 📝 Post Job -->
+    <div class="job-form">
+      <h3>Post a Job</h3>
+      <input type="text" id="jobTitle" placeholder="Job Title" required>
+      <input type="text" id="jobInstitution" placeholder="Institution / Location" required>
+      <textarea id="jobDesc" placeholder="Job Description" rows="4" required></textarea>
+      <button class="btn" onclick="postJob()">Post Job</button>
+    </div>
+
+    <!-- 📋 My Jobs -->
+    <div class="job-list">
+      <h3>My Posted Jobs</h3>
+      <div id="myJobs"></div>
+    </div>
+  </div>
+
+  <footer><p>© 2025 Students Hub — Gov/Companies Portal</p></footer>
+
+  <script src="../data.js"></script>
+  <script>
+    const ADMIN_PASSWORD = "studentshub123";
+
+    function checkLogin() {
+      const input = document.getElementById("password").value;
+      if (input === ADMIN_PASSWORD) {
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("portalSection").style.display = "block";
+        showAllStudents();
+        loadJobs();
+      } else {
+        document.getElementById("errorMsg").style.display = "block";
+      }
+    }
+
+    function showAllStudents() {
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+      Object.keys(students).forEach(id => {
+        const s = students[id];
+        results.innerHTML += `
+          <div class="card profile-card" onclick="viewProfile(${id})">
+            <div class="avatar">${s.initials}</div>
+            <div class="p-info">
+              <div class="p-name">${s.name}</div>
+              <div class="p-skill">${s.skills}</div>
+              <div class="p-inst"><strong>${s.institution}</strong></div>
+            </div>
+          </div>`;
+      });
+    }
+
+    function filterStudents() {
+      const query = document.getElementById("studentSearch").value.toLowerCase();
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+      Object.keys(students).forEach(id => {
+        const s = students[id];
+        if (s.name.toLowerCase().includes(query) || s.skills.toLowerCase().includes(query) || s.institution.toLowerCase().includes(query)) {
+          results.innerHTML += `
+            <div class="card profile-card" onclick="viewProfile(${id})">
+              <div class="avatar">${s.initials}</div>
+              <div class="p-info">
+                <div class="p-name">${s.name}</div>
+                <div class="p-skill">${s.skills}</div>
+                <div class="p-inst"><strong>${s.institution}</strong></div>
+              </div>
+            </div>`;
+        }
+      });
+    }
+
+    function viewProfile(id) {
+      window.location.href = "../student-profile.html?id=" + id;
+    }
+
+    // 📝 Post job
+    function postJob() {
+      const title = document.getElementById("jobTitle").value.trim();
+      const institution = document.getElementById("jobInstitution").value.trim();
+      const desc = document.getElementById("jobDesc").value.trim();
+      if (!title || !institution || !desc) {
+        alert("Please fill in all fields");
+        return;
+      }
+
+      const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+      const newJob = {
+        title, institution, desc,
+        postedAt: new Date().toLocaleString()
+      };
+      jobs.push(newJob);
+      localStorage.setItem("jobs", JSON.stringify(jobs));
+      document.getElementById("jobTitle").value = "";
+      document.getElementById("jobInstitution").value = "";
+      document.getElementById("jobDesc").value = "";
+      loadJobs();
+      alert("Job posted successfully!");
+    }
+
+    // 📋 Load posted jobs
+    function loadJobs() {
+      const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+      const myJobs = document.getElementById("myJobs");
+      myJobs.innerHTML = "";
+      jobs.forEach(j => {
+        myJobs.innerHTML += `
+          <div class="card">
+            <h4>${j.title}</h4>
+            <p><strong>${j.institution}</strong></p>
+            <p>${j.desc}</p>
+            <small>Posted on: ${j.postedAt}</small>
+          </div>`;
+      });
+    }
+  </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("✅ Service Worker registered"))
+      .catch(err => console.log("❌ Service Worker failed:", err));
+  }
+</script>
+
+</body>
+</html>
