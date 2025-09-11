@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students Hub - Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-section {
+      padding: 100px 20px 60px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    input, textarea, select, button {
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #ffd700;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #e6c200;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0d1b2a;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo">Students Hub</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="categories.html">Categories</a>
+      <a href="profiles.html">Profiles</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="_replyto" placeholder="Your Email" required>
+      <input type="tel" name="phone" placeholder="Phone Number">
+      <select name="reason">
+        <option value="">Select Inquiry Type</option>
+        <option value="Job Inquiry">Job Inquiry</option>
+        <option value="Partnership">Partnership</option>
+        <option value="Other">Other</option>
+      </select>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Students Hub | Connecting Students to Opportunities</p>
+    <p>Email: support@studenthub.com | Follow us on social media</p>
+  </footer>
+</body>
+</html>

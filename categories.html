@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students Hub - Categories</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .categories-section {
+      padding: 100px 20px 60px;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .category-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: #0d1b2a;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .category-card h3 {
+      margin-bottom: 10px;
+      color: #ffd700;
+    }
+
+    .category-card p {
+      font-size: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo">Students Hub</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="categories.html">Categories</a>
+      <a href="profiles.html">Profiles</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <h2>Job Categories</h2>
+    <div class="categories-grid">
+      <a href="jobs.html?category=IT" class="category-card">
+        <h3>IT & Tech</h3>
+        <p>Internships and jobs for IT, programming, and tech students.</p>
+      </a>
+      <a href="jobs.html?category=Catering" class="category-card">
+        <h3>Catering & Events</h3>
+        <p>Opportunities in catering, event management, and hospitality.</p>
+      </a>
+      <a href="jobs.html?category=Tutoring" class="category-card">
+        <h3>Tutoring & Education</h3>
+        <p>Part-time teaching and tutoring roles for students.</p>
+      </a>
+      <a href="jobs.html?category=Retail" class="category-card">
+        <h3>Retail & Sales</h3>
+        <p>Work in shops, stores, and retail environments.</p>
+      </a>
+      <a href="jobs.html?category=Design" class="category-card">
+        <h3>Design & Media</h3>
+        <p>Graphic design, video editing, and content creation jobs.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Students Hub | Connecting Students to Opportunities</p>
+  </footer>
+
+  <script>
+    // Optional: you can add JS here to handle dynamic category filtering on jobs.html
+  </script>
+</body>
+</html>
