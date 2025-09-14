@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institution Portal - Students Hub</title>
+  <link rel="stylesheet" href="institution.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🏛 Institution Portal</div>
+    <ul>
+      <li><a href="studentlanding.html">Home</a></li>
+      <li><a href="institution.html" class="active">Manage Students</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Students Management</h2>
+
+    <h3>Pending Students</h3>
+    <table id="pendingTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Institution</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3>Verified Students</h3>
+    <table id="verifiedTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Institution</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="institution.js"></script>
+</body>
+</html>

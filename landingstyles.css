@@ -1,0 +1,120 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Colors */
+:root {
+  --moss: #556b2f;
+  --lavender: #e6e6fa;
+  --dark: #0d1b2a;
+}
+
+/* Header */
+header {
+  background: var(--dark);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.brand-logo {
+  background: var(--moss);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Landing Main */
+.landing {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.landing h1 {
+  font-size: 2.2rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.landing p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.card {
+  display: block;
+  background: var(--lavender);
+  color: var(--dark);
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  background: #d8d8f0;
+}
+
+/* Playstore */
+.app-download {
+  margin-top: 40px;
+}
+
+.app-download img {
+  width: 200px;
+  transition: transform 0.3s;
+}
+
+.app-download img:hover {
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .landing h1 {
+    font-size: 1.8rem;
+  }
+  .card {
+    font-size: 16px;
+  }
+  .app-download img {
+    width: 160px;
+  }
+}

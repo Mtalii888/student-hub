@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🎓 Students Hub</div>
+    <ul>
+      <li><a href="studentlanding.html">Home</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="register.html" class="active">Register</a></li>
+    </ul>
+  </nav>
+
+  <!-- Registration Form -->
+  <div class="form-container">
+    <h2>Register as Student</h2>
+    <form id="registerForm">
+      <!-- Section 1 -->
+      <div class="form-section">
+        <h3>Student Information</h3>
+        <label for="studentType">Type</label>
+        <select id="studentType" name="studentType" required>
+          <option value="">--Select--</option>
+          <option value="tvet">TVET College</option>
+          <option value="university">University</option>
+        </select>
+
+        <label for="idNumber">ID Number</label>
+        <input type="text" id="idNumber" name="idNumber" required>
+
+        <label for="firstName">First Name (as per ID)</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="institutionName">Institution Name</label>
+        <input type="text" id="institutionName" name="institutionName" required>
+
+        <label for="dob">Year of Birth</label>
+        <input type="number" id="dob" name="dob" required>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="form-section">
+        <h3>Contact Information</h3>
+        <label for="contact">Phone Number</label>
+        <input type="text" id="contact" name="contact" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="form-section">
+        <h3>Account Security</h3>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+      </div>
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+    <p class="switch-page">Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>

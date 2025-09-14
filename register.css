@@ -1,0 +1,105 @@
+/* General */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background: #4b6f44; /* moss green */
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  color: #fff;
+}
+
+.navbar .logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover {
+  background: #9370db; /* lavender */
+  border-radius: 5px;
+}
+
+/* Form */
+.form-container {
+  background: #fff;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.form-container h2 {
+  margin-bottom: 1rem;
+  color: #4b6f44;
+}
+
+.form-section {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-section h3 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin: 0.5rem 0 0.2rem;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.btn {
+  background: #4b6f44;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background: #3a5534;
+}
+
+.switch-page {
+  margin-top: 1rem;
+}

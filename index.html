@@ -1,53 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Students Hub — Home</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students Hub Landing</title>
+  <link rel="stylesheet" href="landingstyles.css">
 </head>
 <body>
-  <div class="header-wrap container">
+  <header>
     <div class="brand">
       <div class="brand-logo">🎓</div>
-      <div>
-        <div class="brand-title">Students Hub</div>
-        <div class="muted">Connect students • Nationwide</div>
-      </div>
+      <span>Students Hub</span>
+    </div>
+  </header>
+
+  <main class="landing">
+    <h1>Welcome to Students Hub</h1>
+    <p>Please choose how you want to continue:</p>
+
+    <div class="options">
+      <a href="regpage.html" class="card">Student Homepage</a>
+      <a href="government.html" class="card">Government Portal</a>
+      <a href="companies.html" class="card">Companies Portal</a>
+      <a href="contact.html" class="card">Contact Us</a>
     </div>
 
-    <nav class="site-nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="jobs.html">Jobs</a>
-      <a href="students.html">Students</a>
-      <a href="credits.html">Credits</a>
-    </nav>
-  </div>
-
-  <main class="container">
-    <section class="hero">
-      <h1>Find meaningful student work across Kenya</h1>
-      <p>Students Hub connects students, companies, and government institutions. Search jobs, build a profile, track credits, and get paid securely.</p>
-    </section>
-
-    <div class="grid">
-      <div class="card">
-        <h2>About</h2>
-        <p>Students Hub helps students discover short-term, flexible, and part-time jobs across counties. Companies and government post work — students apply and complete tasks to earn credits and payments.</p>
-      </div>
-
-      <div class="card">
-        <h2>How it works</h2>
-        <ol>
-          <li>Students register and build profiles.</li>
-          <li>Companies/Government post jobs (secure portal).</li>
-          <li>Students apply, complete tasks and receive credits.</li>
-          <li>Payments are released after confirmation.</li>
-        </ol>
-      </div>
+    <!-- Play Store Button -->
+    <div class="app-download">
+      <a href="https://play.google.com/store/apps/details?id=com.example.studentshub" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+             alt="Get it on Google Play">
+      </a>
     </div>
   </main>
 
-  <footer>© 2025 Students Hub • Built responsive with HTML/CSS/JS</footer>
+  <footer>
+    <p>© 2025 Students Hub</p>
+  </footer>
 </body>
 </html>
+
