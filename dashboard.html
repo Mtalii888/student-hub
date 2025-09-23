@@ -10,11 +10,13 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <h2>Dashboard</h2>
-    <a href="#" class="active" onclick="showSection('profile')">👤 Profile</a>
-    <a href="#" onclick="showSection('skills')">💡 My Skills</a>
-    <a href="#" onclick="showSection('earnings')">💰 Earnings</a>
-    <a href="#" onclick="showSection('documents')">📄 My Documents</a>
-    <a href="#" onclick="showSection('credits')">⭐ Credits</a>
+    <a href="#" class="active" onclick="showSection('profile', event)">👤 Profile</a>
+    <a href="#" onclick="showSection('skills', event)">💡 My Skills</a>
+    <a href="#" onclick="showSection('earnings', event)">💰 Earnings</a>
+    <a href="#" onclick="showSection('documents', event)">📄 My Documents</a>
+    <a href="#" onclick="showSection('credits', event)">⭐ Credits</a>
+    <a href="job.html" onclick="showSection('jobs', event)">💼 Jobs</a>
+
   </div>
 
   <!-- Main Area -->
@@ -55,8 +57,7 @@
       <div id="skills" class="section">
         <h2>My Skills</h2>
         <ul class="skills-list" id="skillsList">
-          <li>Web Development</li>
-          <li>Data Analysis</li>
+          <!-- Skills will be loaded from localStorage -->
         </ul>
         <input type="text" id="newSkill" placeholder="Add new skill">
         <button onclick="addSkill()">Add Skill</button>
@@ -80,11 +81,11 @@
         <h2>My Documents</h2>
         <div class="documents">
           <label>Upload Transcript</label>
-          <input type="file">
+          <input type="file" id="uploadTranscript">
           <label>Upload Resume</label>
-          <input type="file">
+          <input type="file" id="uploadResume">
           <label>Upload Recommendation Letter</label>
-          <input type="file">
+          <input type="file" id="uploadRecommendation">
         </div>
       </div>
 
@@ -98,49 +99,170 @@
       </div>
     </div>
   </div>
+<!-- Jobs -->
+<div id="jobs" class="section">
+  <h2>Job Profile</h2>
 
+  <div class="profile">
+    <img id="jobProfilePicDash" src="https://via.placeholder.com/80">
+    <div>
+      <p><strong>Name:</strong> <span id="jobNameDash">John Doe</span></p>
+      <p><strong>Contact:</strong> <span id="jobContactDash">+254 700 000000</span></p>
+      <p><strong>Email:</strong> <span id="jobEmailDash">john@student.com</span></p>
+    </div>
+  </div>
+
+  <div class="skills">
+    <h3>Skills</h3>
+    <ul id="jobSkillsDash"></ul>
+  </div>
+
+  <div class="earnings">
+    <h3>Earnings</h3>
+    <p id="jobEarningsDash">KES 0</p>
+  </div>
+
+  <div class="documents">
+    <h3>Documents</h3>
+    <ul id="jobDocumentsDash" class="document-list"></ul>
+  </div>
+</div>
+
+  <!-- Scripts -->
   <script>
-    function showSection(id) {
+    // --- Show Section with Active Link ---
+    function showSection(id, event) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
 
       document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-      event.target.classList.add('active');
+      event.currentTarget.classList.add('active');
     }
 
-    function addSkill() {
-      const skill = document.getElementById("newSkill").value;
-      if (skill.trim() !== "") {
+    // --- Load Data from localStorage ---
+    function loadDashboardData() {
+      // Profile
+      const storedName = localStorage.getItem("studentName");
+      if(storedName) document.getElementById("studentName").textContent = storedName;
+
+      const storedContact = localStorage.getItem("studentContact");
+      if(storedContact) document.getElementById("studentContact").textContent = storedContact;
+
+      const storedEmail = localStorage.getItem("studentEmail");
+      if(storedEmail) document.getElementById("studentEmail").textContent = storedEmail;
+
+      const storedPic = localStorage.getItem("profilePic");
+      if(storedPic) document.getElementById("profilePic").src = storedPic;
+
+      // Skills
+      const skills = JSON.parse(localStorage.getItem("skillsList")) || [];
+      const ul = document.getElementById("skillsList");
+      ul.innerHTML = "";
+      skills.forEach(skill => {
         const li = document.createElement("li");
         li.textContent = skill;
-        document.getElementById("skillsList").appendChild(li);
-        document.getElementById("newSkill").value = "";
-      }
+        ul.appendChild(li);
+      });
+
+      // Earnings
+      const storedEarnings = localStorage.getItem("earnings");
+      if(storedEarnings) document.querySelector(".earnings-summary strong").textContent = `KES ${storedEarnings}`;
     }
 
-    function requestContactChange() {
-      const newContact = document.getElementById("newContact").value;
-      if (newContact.trim() !== "") {
-        alert("Contact change request submitted for approval: " + newContact);
-        document.getElementById("newContact").value = "";
-      }
-    }
-
+    // --- Profile Picture Upload ---
     document.getElementById("uploadPic").addEventListener("change", function(e) {
       const file = e.target.files[0];
-      if (file) {
+      if (file && file.type.startsWith("image/") && file.size < 2 * 1024 * 1024) {
         const reader = new FileReader();
         reader.onload = function(evt) {
           document.getElementById("profilePic").src = evt.target.result;
+          localStorage.setItem("profilePic", evt.target.result);
         }
         reader.readAsDataURL(file);
+      } else {
+        alert("Please select an image smaller than 2MB.");
       }
     });
 
+    // --- Skills Addition ---
+    function addSkill() {
+      const skillInput = document.getElementById("newSkill");
+      const skill = skillInput.value.trim();
+      if(skill !== "") {
+        const skillsList = JSON.parse(localStorage.getItem("skillsList")) || [];
+        if(!skillsList.includes(skill)) {
+          skillsList.push(skill);
+          localStorage.setItem("skillsList", JSON.stringify(skillsList));
+
+          const li = document.createElement("li");
+          li.textContent = skill;
+          document.getElementById("skillsList").appendChild(li);
+        }
+        skillInput.value = "";
+      }
+    }
+
+    // --- Contact Change Request ---
+    function requestContactChange() {
+      const newContact = document.getElementById("newContact").value.trim();
+      if(newContact !== "") {
+        alert("Contact change request submitted for approval: " + newContact);
+        document.getElementById("newContact").value = "";
+        localStorage.setItem("studentContact", newContact);
+      }
+    }
+
+    // --- Logout ---
     function logout() {
       alert("You have been logged out.");
-      window.location.href = "studentlanding.html"; // Redirect back to landing
+      window.location.href = "studentlanding.html";
     }
+
+    // --- Load Dashboard Data on Start ---
+    loadDashboardData();
+    // --- Load Job Section Data ---
+function loadJobSection() {
+  // Profile info
+  const profilePic = localStorage.getItem("profilePic");
+  if(profilePic) document.getElementById("jobProfilePicDash").src = profilePic;
+
+  const name = localStorage.getItem("studentName");
+  if(name) document.getElementById("jobNameDash").textContent = name;
+
+  const contact = localStorage.getItem("studentContact");
+  if(contact) document.getElementById("jobContactDash").textContent = contact;
+
+  const email = localStorage.getItem("studentEmail");
+  if(email) document.getElementById("jobEmailDash").textContent = email;
+
+  // Skills
+  const skills = JSON.parse(localStorage.getItem("skillsList")) || [];
+  const skillsUl = document.getElementById("jobSkillsDash");
+  skillsUl.innerHTML = "";
+  skills.forEach(skill => {
+    const li = document.createElement("li");
+    li.textContent = skill;
+    skillsUl.appendChild(li);
+  });
+
+  // Earnings
+  const earnings = localStorage.getItem("earnings") || 0;
+  document.getElementById("jobEarningsDash").textContent = `KES ${earnings}`;
+
+  // Documents
+  const documents = JSON.parse(localStorage.getItem("documentsList")) || [];
+  const docUl = document.getElementById("jobDocumentsDash");
+  docUl.innerHTML = "";
+  documents.forEach(doc => {
+    const li = document.createElement("li");
+    li.textContent = doc;
+    docUl.appendChild(li);
+  });
+}
+
+// --- Call every time dashboard loads or data changes ---
+setInterval(loadJobSection, 1000); // Updates every 1 sec
+
   </script>
 </body>
 </html>
